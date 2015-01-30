@@ -1,0 +1,3 @@
+mongomock
+pyyaml
+pytest>=2.5.2

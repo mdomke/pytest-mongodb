@@ -22,8 +22,14 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def humongous(pytestconfig):
     db = Connection().humongous
+    clean_database(db)
     load_fixtures(db, pytestconfig)
     return db
+
+
+def clean_database(db):
+    for name in db.collection_names(include_system_collections=False):
+        db.drop_collection(name)
 
 
 def load_fixtures(db, config):

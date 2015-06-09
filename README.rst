@@ -24,7 +24,7 @@ you have to specify a directory where `humongous` looks for your data definition
 To do so put a line like the following under the ``pytest`` section of your
 `pytest.ini`-file put a
 
-..code-block:: ini
+.. code-block:: ini
 
     [pytest]
     humongous_basedir =
@@ -43,7 +43,7 @@ as a list of documents (dicts). The collection that these documents are being in
 into is given by the filename of your fixutre-file. E.g.: If you had a file named
 ``players.yaml`` with the following content:
 
-..code-block:: yaml
+.. code-block:: yaml
 
     -
       name: Mario
@@ -61,7 +61,7 @@ you'd end up with a collection `players` that has the above player definitions i
 You get ahold of the database in you test-function by using the ``humongous`` fixture
 like so:
 
-..code-block:: python
+.. code-block:: python
 
     def test_players(humongous):
         assert "players" in humongous.collection_names()

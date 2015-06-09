@@ -1,3 +1,9 @@
+.. image:: https://img.shields.io/pypi/v/humongous.svg
+    :target: https://pypi.python.org/pypi/humongous
+.. image:: https://travis-ci.org/mdomke/humongous.svg?branch=master
+    :target: https://travis-ci.org/mdomke/humongous
+.. image:: https://img.shields.io/pypi/l/humongous.svg
+    :target: https://pypi.python.org/pypi/humongous
 
 What is this?
 =============

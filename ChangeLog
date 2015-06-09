@@ -1,0 +1,20 @@
+CHANGES
+=======
+
+1.0.2
+-----
+
+* Pass LANG in tox.ini. Env-isolation of tox-2.0 breaks stuff
+
+1.0.1
+-----
+
+* Clean database before loading fixtures
+
+1.0.0
+-----
+
+* Set next development version to 1.1.0
+* Provide basic documentation in README.rst
+* Initial version
+* Initial commit

@@ -1,9 +1,11 @@
+from humongous import plugin
 
 
 def test_load(humongous):
     collection_names = humongous.collection_names()
     assert "players" in collection_names
     assert "championships" in collection_names
+    assert len(plugin._cache.keys()) == 2
     check_players(humongous.players)
     check_championships(humongous.championships)
 

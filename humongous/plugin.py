@@ -6,6 +6,9 @@ from mongomock import Connection
 import yaml
 
 
+_cache = {}
+
+
 def pytest_addoption(parser):
 
     parser.addini(
@@ -39,7 +42,7 @@ def load_fixtures(db, config):
     for file_name in os.listdir(basedir):
         collection, ext = os.path.splitext(os.path.basename(file_name))
         selected = fixtures and collection in fixtures
-        supported = ext in ["json", "yaml"]
+        supported = ext in ("json", "yaml")
         if not selected and supported:
             continue
         path = os.path.join(basedir, file_name)
@@ -53,6 +56,11 @@ def load_fixture(db, collection, path, format):
         loader = yaml.load
     else:
         return
-    with open(path) as fp:
-        for document in loader(fp):
-            db[collection].insert(document)
+    try:
+        docs = _cache[path]
+    except KeyError:
+        with open(path) as fp:
+            _cache[path] = docs = loader(fp)
+
+    for document in docs:
+        db[collection].insert(document)

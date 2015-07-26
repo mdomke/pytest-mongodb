@@ -1,6 +1,26 @@
 CHANGES
 =======
 
+* Update package meta data. Add license and dev status
+
+1.0.5
+-----
+
+* Update README.rst
+* Add highlighting to code-blocks
+
+1.0.4
+-----
+
+* Build wheels instead of source packages
+
+1.0.3
+-----
+
+* Use MIT license
+* Add build and version info to README
+* Update pip before building
+* Add travis configuration
 * Add changelog ignore AUTHORS
 
 1.0.2

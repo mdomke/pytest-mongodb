@@ -1,8 +1,11 @@
+import functools
 import json
 import os
 
+from bson import json_util
+import mongomock
 import pytest
-from mongomock import Connection
+import pymongo
 import yaml
 
 
@@ -21,13 +24,40 @@ def pytest_addoption(parser):
         help="Try loading fixtures from this directory",
         default=os.getcwd())
 
+    parser.addini(
+        name="humongous_engine",
+        help="The database engine to use [mongomock]",
+        default="mongomock")
+
+    parser.addini(
+        name="humongous_host",
+        help="The host where the mongodb-server runs",
+        default="localhost")
+
+    parser.addini(
+        name="humongous_dbname",
+        help="The name of the database where fixtures are created [humongous]",
+        default="humongous")
+
 
 @pytest.fixture(scope="function")
 def humongous(pytestconfig):
-    db = Connection().humongous
+    dbname = pytestconfig.getini("humongous_dbname")
+    client = make_mongo_client(pytestconfig)
+    db = client[dbname]
     clean_database(db)
     load_fixtures(db, pytestconfig)
     return db
+
+
+def make_mongo_client(config):
+    engine = config.getini("humongous_engine")
+    host = config.getini("humongous_host")
+    if engine == "pymongo":
+        client = pymongo.MongoClient(host)
+    else:
+        client = mongomock.MongoClient(host)
+    return client
 
 
 def clean_database(db):
@@ -51,7 +81,7 @@ def load_fixtures(db, config):
 
 def load_fixture(db, collection, path, format):
     if format == "json":
-        loader = json.load
+        loader = functools.partial(json.load, object_hook=json_util.object_hook)
     elif format == "yaml":
         loader = yaml.load
     else:
@@ -63,4 +93,5 @@ def load_fixture(db, collection, path, format):
             _cache[path] = docs = loader(fp)
 
     for document in docs:
+        print(document)
         db[collection].insert(document)

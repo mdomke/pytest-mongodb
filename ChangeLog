@@ -1,6 +1,12 @@
 CHANGES
 =======
 
+
+1.1.0
+-----
+
+* Set next development target to 1.2.0
+* Load parsed docs from cache
 * Update package meta data. Add license and dev status
 
 1.0.5

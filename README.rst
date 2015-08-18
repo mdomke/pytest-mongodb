@@ -10,9 +10,10 @@ What is this?
 
 This is a pytest plugin, that enables you to test your code that relies on a
 database connection to a MongoDB and expectes certain data to be present.
-It allows you to specify fixtures for database collections in JSON or YAML
+It allows you to specify fixtures for database collections in JSON/BSON or YAML
 format. Under the hood we use the mongomock_ library, that you should
-consult for documentation on how to use MongoDB mock objects.
+consult for documentation on how to use MongoDB mock objects. If suitable you
+can also use a real MongoDb server.
 
 
 Configuration
@@ -32,6 +33,19 @@ To do so put a line like the following under the ``pytest`` section of your
 
 `humongous` would then look for files ending in ``.yaml`` or ``.json`` in that
 directory.
+
+You can also choose to use a real MongoDB server for your tests. In that case
+you might also want to configure the hostname and/or the credentials if you
+don't want to stick with the default (localhost and no credentials). Use the
+following configuration values in your `pytest.ini` to adapt the settings to
+your needs:
+
+.. code-block:: ini
+
+    [pytest]
+    humongous_engine = pymongo
+    humongous_host = mongodb://user:passwd@server.tld
+    humongous_dbname = mydbname
 
 
 Basic usage
@@ -56,7 +70,10 @@ into is given by the filename of your fixutre-file. E.g.: If you had a file name
       position: keeper
 
 
-you'd end up with a collection `players` that has the above player definitions inserted.
+you'd end up with a collection `players` that has the above player definitions
+inserted. If your fixture file is in JSON/BSON format you can also use BSON specific
+types like `$oid`, `$date`, etc.
+
 
 You get ahold of the database in you test-function by using the ``humongous`` fixture
 like so:

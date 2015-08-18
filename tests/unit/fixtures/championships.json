@@ -1,15 +1,18 @@
 [
   {
+    "_id": {"$oid": "55d2db06f4811f83a1f27be8"},
     "year": 2014,
     "host": "Brazil",
     "winner": "Germany"
   },
   {
+    "_id": {"$oid": "55d2db19f4811f83a1f27be9"},
     "year": 2010,
     "host": "South Africa",
     "winner": "Spain"
   },
   {
+    "_id": {"$oid": "55d2db30f4811f83a1f27bea"},
     "year": 2006,
     "host": "Germany",
     "winner": "France"

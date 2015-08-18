@@ -93,5 +93,4 @@ def load_fixture(db, collection, path, format):
             _cache[path] = docs = loader(fp)
 
     for document in docs:
-        print(document)
         db[collection].insert(document)

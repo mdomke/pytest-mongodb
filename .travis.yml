@@ -2,7 +2,7 @@ language: python
 python:
 - '2.7'
 install:
-- pip install -U pip wheel tox
+- pip install -U pip wheel tox twine
 script:
 - tox
 deploy:

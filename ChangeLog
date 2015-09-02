@@ -1,6 +1,28 @@
 CHANGES
 =======
 
+* pinning mongomock version below 3.0.0
+
+1.2.3
+-----
+
+* Remove bogus print call
+
+1.2.2
+-----
+
+* Add twine for deployment to workaround https://github.com/travis-ci/dpl/issues/296
+
+1.2.1
+-----
+
+* Update travis configuration to possibly fix deplyoment problem
+
+1.2.0
+-----
+
+* Set next development target to 1.3.0
+* Use bson.json_util to load fixtures. Allow real MongoClient
 
 1.1.0
 -----

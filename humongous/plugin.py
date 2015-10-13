@@ -39,10 +39,23 @@ def pytest_addoption(parser):
         help="The name of the database where fixtures are created [humongous]",
         default="humongous")
 
+    parser.addoption(
+        "--humongous_engine",
+        help="The database engine to use [mongomock]")
+
+    parser.addoption(
+        "--humongous_host",
+        help="The host where the mongodb-server runs")
+
+    parser.addoption(
+        "--humongous_dbname",
+        help="The name of the database where fixtures are created [humongous]")
+
 
 @pytest.fixture(scope="function")
 def humongous(pytestconfig):
-    dbname = pytestconfig.getini("humongous_dbname")
+    dbname = pytestconfig.getoption("humongous_dbname") or \
+        pytestconfig.getini("humongous_dbname")
     client = make_mongo_client(pytestconfig)
     db = client[dbname]
     clean_database(db)
@@ -51,8 +64,10 @@ def humongous(pytestconfig):
 
 
 def make_mongo_client(config):
-    engine = config.getini("humongous_engine")
-    host = config.getini("humongous_host")
+    engine = config.getoption('humongous_engine') or \
+        config.getini("humongous_engine")
+    host = config.getoption('humongous_host') or \
+        config.getini("humongous_host")
     if engine == "pymongo":
         client = pymongo.MongoClient(host)
     else:

@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+* Adds command line option to change humongous settings
+
+1.2.4
+-----
+
 * pinning mongomock version below 3.0.0
 
 1.2.3

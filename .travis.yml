@@ -14,4 +14,4 @@ deploy:
   on:
     tags: true
     all_branches: true
-    repo: mdomke/humongous
+    repo: mdomke/pytest-mongodb

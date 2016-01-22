@@ -1,4 +1,4 @@
-mongomock>=2.3,<3.0.0
+mongomock
 pymongo
 pyyaml
 pytest>=2.5.2

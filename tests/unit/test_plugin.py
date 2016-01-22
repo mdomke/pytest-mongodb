@@ -1,26 +1,26 @@
-from humongous import plugin
+from pytest_mongodb import plugin
 
 
-def test_load(humongous):
-    collection_names = humongous.collection_names()
-    assert "players" in collection_names
-    assert "championships" in collection_names
+def test_load(mongodb):
+    collection_names = mongodb.collection_names()
+    assert 'players' in collection_names
+    assert 'championships' in collection_names
     assert len(plugin._cache.keys()) == 2
-    check_players(humongous.players)
-    check_championships(humongous.championships)
+    check_players(mongodb.players)
+    check_championships(mongodb.championships)
 
 
 def check_players(players):
     assert players.count() == 2
-    check_keys_in_docs(players, ["name", "surname", "position"])
-    manuel = players.find_one({"name": "Manuel"})
-    assert manuel["surname"] == "Neuer"
-    assert manuel["position"] == "keeper"
+    check_keys_in_docs(players, ['name', 'surname', "position"])
+    manuel = players.find_one({'name': 'Manuel'})
+    assert manuel['surname'] == 'Neuer'
+    assert manuel['position'] == 'keeper'
 
 
 def check_championships(championships):
     assert championships.count() == 3
-    check_keys_in_docs(championships, ["year", "host", "winner"])
+    check_keys_in_docs(championships, ['year', 'host', 'winner'])
 
 
 def check_keys_in_docs(collection, keys):
@@ -29,11 +29,11 @@ def check_keys_in_docs(collection, keys):
             assert key in doc
 
 
-def test_insert(humongous):
-    humongous.players.insert({
-        "name": "Bastian",
-        "surname": "Schweinsteiger",
-        "position": "midfield"
+def test_insert(mongodb):
+    mongodb.players.insert({
+        'name': 'Bastian',
+        'surname': 'Schweinsteiger',
+        'position': 'midfield'
     })
-    assert humongous.players.count() == 3
-    assert humongous.players.find_one({"name": "Bastian"})
+    assert mongodb.players.count() == 3
+    assert mongodb.players.find_one({'name': 'Bastian'})

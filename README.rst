@@ -1,9 +1,9 @@
-.. image:: https://img.shields.io/pypi/v/humongous.svg
-    :target: https://pypi.python.org/pypi/humongous
-.. image:: https://travis-ci.org/mdomke/humongous.svg?branch=master
-    :target: https://travis-ci.org/mdomke/humongous
-.. image:: https://img.shields.io/pypi/l/humongous.svg
-    :target: https://pypi.python.org/pypi/humongous
+.. image:: https://img.shields.io/pypi/v/pytest-mongodb.svg
+    :target: https://pypi.python.org/pypi/pytest-mongodb
+.. image:: https://travis-ci.org/mdomke/pytest-mongodb.svg?branch=master
+    :target: https://travis-ci.org/mdomke/pytest-mongodb
+.. image:: https://img.shields.io/pypi/l/pytest-mongodb.svg
+    :target: https://pypi.python.org/pypi/pytest-mongodb
 
 What is this?
 =============
@@ -15,12 +15,15 @@ format. Under the hood we use the mongomock_ library, that you should
 consult for documentation on how to use MongoDB mock objects. If suitable you
 can also use a real MongoDb server.
 
+*Note*: This project has been renamed from `humongous` to `pytest-mongodb` in order
+to conform to the pytest plugin naming conventions and to be more easy to find.
+
 
 Configuration
 -------------
 
 If you don't want to put your fixtures on the top-level directory of your package
-you have to specify a directory where `humongous` looks for your data definitions.
+you have to specify a directory where `pytest-mongodb` looks for your data definitions.
 
 To do so put a line like the following under the ``pytest`` section of your
 `pytest.ini`-file put a
@@ -28,10 +31,10 @@ To do so put a line like the following under the ``pytest`` section of your
 .. code-block:: ini
 
     [pytest]
-    humongous_basedir =
+    mongodb_fixture_dir =
       tests/unit/fixtures
 
-`humongous` would then look for files ending in ``.yaml`` or ``.json`` in that
+`pytest-mongodb` would then look for files ending in ``.yaml`` or ``.json`` in that
 directory.
 
 You can also choose to use a real MongoDB server for your tests. In that case
@@ -43,15 +46,15 @@ your needs:
 .. code-block:: ini
 
     [pytest]
-    humongous_engine = pymongo
-    humongous_host = mongodb://user:passwd@server.tld
-    humongous_dbname = mydbname
+    mongodb_engine = pymongo
+    mongodb_host = mongodb://user:passwd@server.tld
+    mongodb_dbname = mydbname
 
 
 Basic usage
 -----------
 
-After you configured `humongous` so that it can find your fixtures you're ready to
+After you configured `pytest-mongodb` so that it can find your fixtures you're ready to
 specify some data. Regardless of the markup language you choose, the data is provided
 as a list of documents (dicts). The collection that these documents are being inserted
 into is given by the filename of your fixutre-file. E.g.: If you had a file named
@@ -80,10 +83,10 @@ like so:
 
 .. code-block:: python
 
-    def test_players(humongous):
-        assert "players" in humongous.collection_names()
-        manuel = humongous.players.find_one({"name": "Manuel"})
-        assert manuel["surname"] == "Neuer"
+    def test_players(mongodb):
+        assert 'players' in mongodb.collection_names()
+        manuel = mongodb.players.find_one({'name': 'Manuel'})
+        assert manuel['surname'] == 'Neuer'
 
 
 For further information refer to the mongomock_ documentation.

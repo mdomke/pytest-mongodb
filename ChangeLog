@@ -1,6 +1,12 @@
 CHANGES
 =======
 
+* Remove version 3.3.5 from .python-version
+
+1.3.0
+-----
+
+* Set next development version to 1.4.0
 * Adds command line option to change humongous settings
 
 1.2.4

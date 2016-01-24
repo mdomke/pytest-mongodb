@@ -9,14 +9,15 @@ What is this?
 =============
 
 This is a pytest plugin, that enables you to test your code that relies on a
-database connection to a MongoDB and expectes certain data to be present.
+database connection to a MongoDB and expects certain data to be present.
 It allows you to specify fixtures for database collections in JSON/BSON or YAML
 format. Under the hood we use the mongomock_ library, that you should
 consult for documentation on how to use MongoDB mock objects. If suitable you
-can also use a real MongoDb server.
+can also use a real MongoDB server.
 
 *Note*: This project has been renamed from `humongous` to `pytest-mongodb` in order
-to conform to the pytest plugin naming conventions and to be more easy to find.
+to conform to the pytest plugin naming conventions and to be more easy to find on the
+Python package index.
 
 
 Configuration
@@ -57,7 +58,7 @@ Basic usage
 After you configured `pytest-mongodb` so that it can find your fixtures you're ready to
 specify some data. Regardless of the markup language you choose, the data is provided
 as a list of documents (dicts). The collection that these documents are being inserted
-into is given by the filename of your fixutre-file. E.g.: If you had a file named
+into is given by the filename of your fixture-file. E.g.: If you had a file named
 ``players.yaml`` with the following content:
 
 .. code-block:: yaml
@@ -90,6 +91,17 @@ like so:
 
 
 For further information refer to the mongomock_ documentation.
+
+
+Migration from humongous
+------------------------
+
+In the course of migrating the package name from `humongous` to `pytest-mongodb` most
+configuration values which previously were prefixed with `humongous_` have been
+renamed to a `mongodb_`-prefixed counterpart. The only notable exception is the
+`humongous_basedir` config value, which now is named `mongodb_fixture_dir`.
+Additionally the commandline options have been unified, in a way that multi-word option
+names are now consistently separated with dashes instead of underscores.
 
 
 

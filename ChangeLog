@@ -1,6 +1,9 @@
 CHANGES
 =======
 
+* Fix monospaced text
+* Adapt documentation. Add migration section
+* Remove version restriction from mongomock
 
 2.0.1
 -----

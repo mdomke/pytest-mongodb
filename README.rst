@@ -17,7 +17,7 @@ can also use a real MongoDB server.
 
 *Note*: This project has been renamed from ``humongous`` to ``pytest-mongodb`` in order
 to conform to the pytest plugin naming conventions and to be more easy to find on the
-Python package index. See the `migration section`_ for more information.
+Python package index. See the `migration section <Migration from humongous_>`_ for more information.
 
 
 Configuration
@@ -95,8 +95,6 @@ For further information refer to the mongomock_ documentation.
 
 Migration from humongous
 ------------------------
-
-.. _migration section:
 
 In the course of migrating the package name from ``humongous`` to ``pytest-mongodb`` most
 configuration values which previously were prefixed with ``humongous_`` have been

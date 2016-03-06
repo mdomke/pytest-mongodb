@@ -92,6 +92,20 @@ like so:
 
 For further information refer to the mongomock_ documentation.
 
+If you want to skip specific tests if the engine is ie. a mongomock engine you could to that
+like so:
+
+
+.. code-block:: python
+
+    from pytest_mongodb import mongo_engine
+    from pytest import mark
+
+    @mark.skipif(mongo_engine() == 'mongomock', reason="mongomock does not support that")
+    def test_players(mongodb):
+        assert 'players' in mongodb.collection_names()
+        manuel = mongodb.players.find_one({'name': 'Manuel'})
+        assert manuel['surname'] == 'Neuer'
 
 Migration from humongous
 ------------------------

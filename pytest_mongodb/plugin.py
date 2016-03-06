@@ -110,3 +110,7 @@ def load_fixture(db, collection, path, format):
 
     for document in docs:
         db[collection].insert(document)
+
+
+def mongo_engine():
+    return pytest.config.getoption('mongodb_engine') or pytest.config.getini('mongodb_engine')

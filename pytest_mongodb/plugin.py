@@ -96,10 +96,10 @@ def load_fixtures(db, config):
         load_fixture(db, collection, path, ext.strip('.'))
 
 
-def load_fixture(db, collection, path, format):
-    if format == 'json':
+def load_fixture(db, collection, path, file_format):
+    if file_format == 'json':
         loader = functools.partial(json.load, object_hook=json_util.object_hook)
-    elif format == 'yaml':
+    elif file_format == 'yaml':
         loader = yaml.load
     else:
         return

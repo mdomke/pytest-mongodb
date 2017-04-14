@@ -88,12 +88,12 @@ def load_fixtures(db, config):
 
     for file_name in os.listdir(basedir):
         collection, ext = os.path.splitext(os.path.basename(file_name))
+        file_format = ext.strip('.')
+        supported = file_format in ('json', 'yaml')
         selected = fixtures and collection in fixtures
-        supported = ext in ('json', 'yaml')
-        if not selected and supported:
-            continue
-        path = os.path.join(basedir, file_name)
-        load_fixture(db, collection, path, ext.strip('.'))
+        if selected and supported:
+            path = os.path.join(basedir, file_name)
+            load_fixture(db, collection, path, file_format)
 
 
 def load_fixture(db, collection, path, file_format):

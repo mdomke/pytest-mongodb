@@ -1,6 +1,7 @@
 import functools
 import json
 import os
+import codecs
 
 from bson import json_util
 import mongomock
@@ -105,7 +106,7 @@ def load_fixture(db, collection, path, format):
     try:
         docs = _cache[path]
     except KeyError:
-        with open(path) as fp:
+        with codecs.open(path, encoding='utf-8') as fp:
             _cache[path] = docs = loader(fp)
 
     for document in docs:

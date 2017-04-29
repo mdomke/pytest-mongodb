@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+2.1.0
+-----
+
+* Added tox-travis and python 3.6 tests/annotations
 * Replaces redundant `pytestconfig.getini` with intended `getoption`
 * Fixes a bug with file extension check
 * Adds Python 3 interpreters for Travis CI

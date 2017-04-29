@@ -17,7 +17,7 @@ can also use a real MongoDB server.
 
 *Note*: This project has been renamed from ``humongous`` to ``pytest-mongodb`` in order
 to conform to the pytest plugin naming conventions and to be more easy to find on the
-Python package index. See the `migration section`_ for more information.
+Python package index. See the `migration section <Migration from humongous_>`_ for more information.
 
 
 Configuration
@@ -92,11 +92,23 @@ like so:
 
 For further information refer to the mongomock_ documentation.
 
+If you want to skip specific tests if the engine is ie. a mongomock engine you could to that
+like so:
+
+
+.. code-block:: python
+
+    from pytest_mongodb import mongo_engine
+    from pytest import mark
+
+    @mark.skipif(mongo_engine() == 'mongomock', reason="mongomock does not support that")
+    def test_players(mongodb):
+        assert 'players' in mongodb.collection_names()
+        manuel = mongodb.players.find_one({'name': 'Manuel'})
+        assert manuel['surname'] == 'Neuer'
 
 Migration from humongous
 ------------------------
-
-.. _migration section:
 
 In the course of migrating the package name from ``humongous`` to ``pytest-mongodb`` most
 configuration values which previously were prefixed with ``humongous_`` have been

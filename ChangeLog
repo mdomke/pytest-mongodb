@@ -1,6 +1,23 @@
 CHANGES
 =======
 
+2.1.0
+-----
+
+* Added tox-travis and python 3.6 tests/annotations
+* Replaces redundant `pytestconfig.getini` with intended `getoption`
+* Fixes a bug with file extension check
+* Adds Python 3 interpreters for Travis CI
+* Adds python 3.5 tox environment and package metadata classifier
+* Local variable name doesn't clash with built-in "format"
+* Fixture files are opened in UTF-8 no matter what the system encoding is
+* Adds function and tests to make skipping for specific engines easier
+* Fix link to migration section
+
+2.0.2
+-----
+
+* Build sdist distributions on travis-ci
 * Fix monospaced text
 * Adapt documentation. Add migration section
 * Remove version restriction from mongomock

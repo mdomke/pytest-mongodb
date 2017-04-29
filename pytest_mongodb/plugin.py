@@ -1,6 +1,7 @@
 import functools
 import json
 import os
+import codecs
 
 from bson import json_util
 import mongomock
@@ -82,31 +83,35 @@ def clean_database(db):
 
 
 def load_fixtures(db, config):
-    basedir = config.getini('mongodb_fixture_dir') or config.getini('mongodb_fixture_dir')
+    basedir = config.getoption('mongodb_fixture_dir') or config.getini('mongodb_fixture_dir')
     fixtures = config.getini('mongodb_fixtures')
 
     for file_name in os.listdir(basedir):
         collection, ext = os.path.splitext(os.path.basename(file_name))
+        file_format = ext.strip('.')
+        supported = file_format in ('json', 'yaml')
         selected = fixtures and collection in fixtures
-        supported = ext in ('json', 'yaml')
-        if not selected and supported:
-            continue
-        path = os.path.join(basedir, file_name)
-        load_fixture(db, collection, path, ext.strip('.'))
+        if selected and supported:
+            path = os.path.join(basedir, file_name)
+            load_fixture(db, collection, path, file_format)
 
 
-def load_fixture(db, collection, path, format):
-    if format == 'json':
+def load_fixture(db, collection, path, file_format):
+    if file_format == 'json':
         loader = functools.partial(json.load, object_hook=json_util.object_hook)
-    elif format == 'yaml':
+    elif file_format == 'yaml':
         loader = yaml.load
     else:
         return
     try:
         docs = _cache[path]
     except KeyError:
-        with open(path) as fp:
+        with codecs.open(path, encoding='utf-8') as fp:
             _cache[path] = docs = loader(fp)
 
     for document in docs:
         db[collection].insert(document)
+
+
+def mongo_engine():
+    return pytest.config.getoption('mongodb_engine') or pytest.config.getini('mongodb_engine')

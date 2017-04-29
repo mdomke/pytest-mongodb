@@ -1,0 +1,7 @@
+# This fixture should NOT be loaded because it's not mentioned in pytest.ini
+- year: 2017
+  winner: NE Patriots
+  loser: AT Falcons
+- year: 2016
+  winner: Broncos
+  loser: Panthers

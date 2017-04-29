@@ -1,8 +1,11 @@
 language: python
 python:
 - '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
 install:
-- pip install -U pip wheel tox twine
+- pip install -U pip wheel tox-travis twine
 script:
 - tox
 deploy:

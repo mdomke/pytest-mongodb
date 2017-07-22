@@ -14,7 +14,6 @@ _cache = {}
 
 
 def pytest_addoption(parser):
-
     parser.addini(
         name='mongodb_fixtures',
         help='Load these fixtures for tests',

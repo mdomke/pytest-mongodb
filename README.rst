@@ -8,22 +8,22 @@
 What is this?
 =============
 
-This is a pytest plugin, that enables you to test your code that relies on a
+This is a pytest_ plugin, that enables you to test your code that relies on a
 database connection to a MongoDB and expects certain data to be present.
 It allows you to specify fixtures for database collections in JSON/BSON or YAML
 format. Under the hood we use the mongomock_ library, that you should
 consult for documentation on how to use MongoDB mock objects. If suitable you
 can also use a real MongoDB server.
 
-*Note*: This project has been renamed from ``humongous`` to ``pytest-mongodb`` in order
-to conform to the pytest plugin naming conventions and to be more easy to find on the
+**Note**: This project has been renamed from ``humongous`` to ``pytest-mongodb`` in order
+to conform to the pytest plugin naming convention and to be easier to find on the
 Python package index. See the `migration section <Migration from humongous_>`_ for more information.
 
 
 Configuration
 -------------
 
-If you don't want to put your fixtures on the top-level directory of your package
+If you don't want to put your database fixtures on the top-level directory of your package
 you have to specify a directory where ``pytest-mongodb`` looks for your data definitions.
 
 To do so put a line like the following under the ``pytest`` section of your
@@ -79,7 +79,7 @@ inserted. If your fixture file is in JSON/BSON format you can also use BSON spec
 types like ``$oid``, ``$date``, etc.
 
 
-You get ahold of the database in you test-function by using the ``humongous`` fixture
+You get ahold of the database in your test-function by using the ``mongodb`` fixture
 like so:
 
 .. code-block:: python
@@ -92,13 +92,13 @@ like so:
 
 For further information refer to the mongomock_ documentation.
 
-If you want to skip specific tests if the engine is ie. a mongomock engine you could to that
+If you want to skip specific tests if the engine is ie. a mongomock engine you could do that
 like so:
 
 
 .. code-block:: python
 
-    from pytest_mongodb import mongo_engine
+    from pytest_mongodb.plugin import mongo_engine
     from pytest import mark
 
     @mark.skipif(mongo_engine() == 'mongomock', reason="mongomock does not support that")
@@ -120,3 +120,4 @@ names are now consistently separated with dashes instead of underscores.
 
 
 .. _mongomock: https://github.com/vmalloc/mongomock
+.. _pytest: https://docs.pytest.org/en/latest/

@@ -82,7 +82,9 @@ def clean_database(db):
 
 
 def load_fixtures(db, config):
-    basedir = config.getoption('mongodb_fixture_dir') or config.getini('mongodb_fixture_dir')
+    config_dir = config.inifile.join('..')
+    fixture_dir = config.getoption('mongodb_fixture_dir') or config.getini('mongodb_fixture_dir')
+    basedir = str(config_dir.join(fixture_dir))
     fixtures = config.getini('mongodb_fixtures')
 
     for file_name in os.listdir(basedir):

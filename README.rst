@@ -38,6 +38,15 @@ To do so put a line like the following under the ``pytest`` section of your
 ``pytest-mongodb`` would then look for files ending in ``.yaml`` or ``.json`` in that
 directory.
 
+If you want to specify collections list, you may append ``mongodb_fixtures`` parameter into ``pytest.ini``:
+
+.. code-block:: ini
+
+    [pytest]
+    mongodb_fixtures =
+      players
+      championships
+
 You can also choose to use a real MongoDB server for your tests. In that case
 you might also want to configure the hostname and/or the credentials if you
 don't want to stick with the default (localhost and no credentials). Use the

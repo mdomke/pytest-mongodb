@@ -109,7 +109,7 @@ def load_fixture(db, collection, path, file_format):
             _cache[path] = docs = loader(fp)
 
     for document in docs:
-        db[collection].insert(document)
+        db[collection].insert_one(document)
 
 
 def mongo_engine():

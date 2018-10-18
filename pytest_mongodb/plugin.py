@@ -108,8 +108,13 @@ def load_fixture(db, collection, path, file_format):
         with codecs.open(path, encoding='utf-8') as fp:
             _cache[path] = docs = loader(fp)
 
+    try:
+        insert_one = getattr(db[collection], 'insert_one')
+    except AttributeError:
+        insert_one = getattr(db[collection], 'insert')
+
     for document in docs:
-        db[collection].insert_one(document)
+        insert_one(document)
 
 
 def mongo_engine():

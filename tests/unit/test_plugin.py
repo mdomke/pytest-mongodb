@@ -1,5 +1,8 @@
 from pytest_mongodb import plugin
-from mock import patch
+try:
+    from mock import patch
+except ImportError:
+    from unittest.mock import patch
 
 
 def test_load(mongodb):

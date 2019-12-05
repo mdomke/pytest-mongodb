@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Wrap deprecated methods
 * Add mock as test-requirement
 * - Loading .yaml or .json collections without defining them in mongodb\_fixtures option
 

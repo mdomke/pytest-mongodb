@@ -3,7 +3,7 @@ from mock import patch
 
 
 def test_load(mongodb):
-    collection_names = mongodb.collection_names()
+    collection_names = mongodb.list_collection_names()
     assert 'players' in collection_names
     assert 'championships' in collection_names
     assert len(plugin._cache.keys()) == 2
@@ -12,7 +12,7 @@ def test_load(mongodb):
 
 
 def check_players(players):
-    assert players.count() == 2
+    assert players.count_documents({}) == 2
     check_keys_in_docs(players, ['name', 'surname', "position"])
     manuel = players.find_one({'name': 'Manuel'})
     assert manuel['surname'] == 'Neuer'
@@ -20,7 +20,7 @@ def check_players(players):
 
 
 def check_championships(championships):
-    assert championships.count() == 3
+    assert championships.count_documents({}) == 3
     check_keys_in_docs(championships, ['year', 'host', 'winner'])
 
 
@@ -31,12 +31,12 @@ def check_keys_in_docs(collection, keys):
 
 
 def test_insert(mongodb):
-    mongodb.players.insert({
+    mongodb.players.insert_one({
         'name': 'Bastian',
         'surname': 'Schweinsteiger',
         'position': 'midfield'
     })
-    assert mongodb.players.count() == 3
+    assert mongodb.players.count_documents({}) == 3
     assert mongodb.players.find_one({'name': 'Bastian'})
 
 

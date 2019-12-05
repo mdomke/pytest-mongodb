@@ -85,7 +85,7 @@ like so:
 .. code-block:: python
 
     def test_players(mongodb):
-        assert 'players' in mongodb.collection_names()
+        assert 'players' in mongodb.list_collection_names()
         manuel = mongodb.players.find_one({'name': 'Manuel'})
         assert manuel['surname'] == 'Neuer'
 
@@ -103,7 +103,7 @@ like so:
 
     @mark.skipif(mongo_engine() == 'mongomock', reason="mongomock does not support that")
     def test_players(mongodb):
-        assert 'players' in mongodb.collection_names()
+        assert 'players' in mongodb.list_collection_names()
         manuel = mongodb.players.find_one({'name': 'Manuel'})
         assert manuel['surname'] == 'Neuer'
 

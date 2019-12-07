@@ -1,8 +1,4 @@
 from pytest_mongodb import plugin
-try:
-    from mock import patch
-except ImportError:
-    from unittest.mock import patch
 
 
 def test_load(mongodb):
@@ -43,11 +39,5 @@ def test_insert(mongodb):
     assert mongodb.players.find_one({'name': 'Bastian'})
 
 
-@patch('pytest_mongodb.plugin.pytest.config')
-def test_mongo_engine(config):
-    config.getoption.return_value = None
-    config.getini.return_value = 'INI_VALUE'
-    assert 'INI_VALUE' == plugin.mongo_engine()
-
-    config.getoption.return_value = 'OPTION_VALUE'
-    assert 'OPTION_VALUE' == plugin.mongo_engine()
+def test_mongo_engine(pytestconfig):
+    assert plugin.mongo_engine() == 'mongomock'

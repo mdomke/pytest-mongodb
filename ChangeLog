@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* Add testenvs for Python 3.7 and 3.8
+* Use unittest.mock for Python > 3.4
 * Wrap deprecated methods
 * Add mock as test-requirement
 * - Loading .yaml or .json collections without defining them in mongodb\_fixtures option

@@ -11,6 +11,7 @@ import yaml
 
 
 _cache = {}
+_engine = 'mongomock'
 
 
 def pytest_addoption(parser):
@@ -54,6 +55,11 @@ def pytest_addoption(parser):
     parser.addoption(
         '--mongodb-dbname',
         help='The name of the database where fixtures are created [pytest]')
+
+
+def pytest_configure(config):
+    global _engine
+    _engine = config.getoption('mongodb_engine') or config.getini('mongodb_engine')
 
 
 @pytest.fixture(scope='function')
@@ -123,4 +129,4 @@ def insert_many(collection, docs):
 
 
 def mongo_engine():
-    return pytest.config.getoption('mongodb_engine') or pytest.config.getini('mongodb_engine')
+    return _engine

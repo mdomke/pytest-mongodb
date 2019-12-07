@@ -95,6 +95,8 @@ def list_collection_names(db):
 
 def load_fixtures(db, config):
     basedir = config.getoption('mongodb_fixture_dir') or config.getini('mongodb_fixture_dir')
+    if not os.path.isabs(basedir):
+        basedir = config.rootdir.join(basedir).strpath
     fixtures = config.getini('mongodb_fixtures')
 
     for file_name in os.listdir(basedir):

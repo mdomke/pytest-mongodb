@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Re-implement mongo\_engine due to deprecation of pytest.config
 * Add testenvs for Python 3.7 and 3.8
 * Use unittest.mock for Python > 3.4
 * Wrap deprecated methods

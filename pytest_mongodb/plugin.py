@@ -11,6 +11,7 @@ import yaml
 
 
 _cache = {}
+_engine = 'mongomock'
 
 
 def pytest_addoption(parser):
@@ -56,6 +57,11 @@ def pytest_addoption(parser):
         help='The name of the database where fixtures are created [pytest]')
 
 
+def pytest_configure(config):
+    global _engine
+    _engine = config.getoption('mongodb_engine') or config.getini('mongodb_engine')
+
+
 @pytest.fixture(scope='function')
 def mongodb(pytestconfig):
     dbname = pytestconfig.getoption('mongodb_dbname') or pytestconfig.getini('mongodb_dbname')
@@ -77,8 +83,14 @@ def make_mongo_client(config):
 
 
 def clean_database(db):
-    for name in db.collection_names(include_system_collections=False):
+    for name in list_collection_names(db):
         db.drop_collection(name)
+
+
+def list_collection_names(db):
+    if hasattr(db, 'list_collection_names'):
+        return db.list_collection_names()
+    return db.collection_names(include_system_collections=False)
 
 
 def load_fixtures(db, config):
@@ -99,7 +111,7 @@ def load_fixture(db, collection, path, file_format):
     if file_format == 'json':
         loader = functools.partial(json.load, object_hook=json_util.object_hook)
     elif file_format == 'yaml':
-        loader = yaml.load
+        loader = functools.partial(yaml.load, Loader=yaml.FullLoader)
     else:
         return
     try:
@@ -107,10 +119,14 @@ def load_fixture(db, collection, path, file_format):
     except KeyError:
         with codecs.open(path, encoding='utf-8') as fp:
             _cache[path] = docs = loader(fp)
+    insert_many(db[collection], docs)
 
-    for document in docs:
-        db[collection].insert(document)
+
+def insert_many(collection, docs):
+    if hasattr(collection, 'insert_many'):
+        return collection.insert_many(docs)
+    return collection.insert(docs)
 
 
 def mongo_engine():
-    return pytest.config.getoption('mongodb_engine') or pytest.config.getini('mongodb_engine')
+    return _engine

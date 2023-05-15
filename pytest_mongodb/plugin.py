@@ -6,8 +6,14 @@ import codecs
 from bson import json_util
 import mongomock
 import pytest
-import pymongo
 import yaml
+
+try:
+    import pymongo
+
+    HAVE_PYMONGO = True
+except ImportError:
+    HAVE_PYMONGO = False
 
 
 _cache = {}
@@ -76,6 +82,8 @@ def make_mongo_client(config):
     engine = config.getoption('mongodb_engine') or config.getini('mongodb_engine')
     host = config.getoption('mongodb_host') or config.getini('mongodb_host')
     if engine == 'pymongo':
+        if not HAVE_PYMONGO:
+            pytest.fail("PyMongo is not installed.")
         client = pymongo.MongoClient(host)
     else:
         client = mongomock.MongoClient(host)

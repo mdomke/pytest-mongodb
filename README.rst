@@ -61,6 +61,8 @@ settings to your needs:
     mongodb_dbname = mydbname
 
 
+For Mac users, who installed mongodb using homebrew, you can configure the executable to be picked up from `/usr/local/bin/mongod` instead of `/usr/local/bin/mongod` by using `mongo_exec = /usr/local/bin/mongod` in the `pytest.ini` file.
+
 Basic usage
 -----------
 

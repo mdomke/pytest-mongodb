@@ -1,9 +1,11 @@
 .. image:: https://img.shields.io/pypi/v/pytest-mongodb.svg
     :target: https://pypi.python.org/pypi/pytest-mongodb
-.. image:: https://travis-ci.org/mdomke/pytest-mongodb.svg?branch=master
-    :target: https://travis-ci.org/mdomke/pytest-mongodb
+.. image:: https://img.shields.io/github/actions/workflow/status/mdomke/pytest-mongodb/lint-and-test.yml?branch=main&style=flat-square
+    :target: https://github.com/mdomke/pytest-mongodb/actions?query=workflow%3Alint-and-test
 .. image:: https://img.shields.io/pypi/l/pytest-mongodb.svg
     :target: https://pypi.python.org/pypi/pytest-mongodb
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square
+    :target: https://black.readthedocs.io/en/stable/index.html
 
 What is this?
 =============
@@ -73,13 +75,11 @@ your fixture-file. E.g.: If you had a file named ``players.yaml`` with the follo
 
 .. code-block:: yaml
 
-    -
-      name: Mario
+    - name: Mario
       surname: Götze
       position: striker
 
-    -
-      name: Manuel
+    - name: Manuel
       surname: Neuer
       position: keeper
 

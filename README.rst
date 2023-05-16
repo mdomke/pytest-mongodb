@@ -1,8 +1,8 @@
-.. image:: https://img.shields.io/pypi/v/pytest-mongodb.svg
+.. image:: https://img.shields.io/pypi/v/pytest-mongodb.svg?style=flat-square
     :target: https://pypi.python.org/pypi/pytest-mongodb
 .. image:: https://img.shields.io/github/actions/workflow/status/mdomke/pytest-mongodb/lint-and-test.yml?branch=main&style=flat-square
     :target: https://github.com/mdomke/pytest-mongodb/actions?query=workflow%3Alint-and-test
-.. image:: https://img.shields.io/pypi/l/pytest-mongodb.svg
+.. image:: https://img.shields.io/pypi/l/pytest-mongodb.svg?style=flat-square
     :target: https://pypi.python.org/pypi/pytest-mongodb
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square
     :target: https://black.readthedocs.io/en/stable/index.html

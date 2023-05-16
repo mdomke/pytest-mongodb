@@ -1,0 +1,49 @@
+[project]
+name = "pytest-mongodb"
+authors = [
+  { name = "Martin Domke", email = "mail@martindomke.net" },
+]
+description = "pytest plugin for MongoDB fixtures"
+readme = "README.rst"
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Framework :: Pytest",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries"
+]
+dynamic = ["version"]
+dependencies = [
+  "mongomock",
+  "pymongo",
+  "pyyaml>=5.1"
+]
+
+[project.urls]
+homepage = "https://github.com/mdomke/pytest-mongodb"  
+
+[project.entry-points.pytest11]
+pytest-mongodb = "pytest_mongodb.plugin"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+force_single_line = true
+force_alphabetical_sort_within_sections = true
+line_length = 100
+lines_after_imports = 2
+
+[tool.setuptools_scm]
+
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"

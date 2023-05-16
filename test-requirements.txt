@@ -1,2 +1,0 @@
-mock ; python_version < '3.5'
-flake8>=2.1.0

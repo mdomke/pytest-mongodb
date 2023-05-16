@@ -1,4 +1,0 @@
-mongomock
-pymongo
-pyyaml>=5.1
-pytest>=2.5.2
